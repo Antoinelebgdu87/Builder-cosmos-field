@@ -2,10 +2,23 @@ import React, { useState, useEffect } from "react";
 import { XPTaskbar } from "./XPTaskbar";
 import { XPDesktopIcons } from "./XPDesktopIcons";
 import { XPBootLoader } from "./XPBootLoader";
+import { XPRecycleBin } from "./XPRecycleBin";
+import { XPFileViewer } from "./XPFileViewer";
 
 interface XPDesktopProps {
   children: React.ReactNode;
   showIcons?: boolean;
+}
+
+interface RecycleBinFile {
+  id: string;
+  name: string;
+  originalLocation: string;
+  deletedDate: string;
+  size: string;
+  type: "image" | "video" | "document" | "other";
+  icon: string;
+  content?: string;
 }
 
 export const XPDesktop: React.FC<XPDesktopProps> = ({
@@ -13,6 +26,9 @@ export const XPDesktop: React.FC<XPDesktopProps> = ({
   showIcons = false,
 }) => {
   const [isBooted, setIsBooted] = useState(false);
+  const [isRecycleBinOpen, setIsRecycleBinOpen] = useState(false);
+  const [isFileViewerOpen, setIsFileViewerOpen] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<RecycleBinFile | null>(null);
 
   useEffect(() => {
     // Check if we've already booted in this session
@@ -25,6 +41,25 @@ export const XPDesktop: React.FC<XPDesktopProps> = ({
   const handleBootComplete = () => {
     sessionStorage.setItem("xp_booted", "true");
     setIsBooted(true);
+  };
+
+  const handleOpenRecycleBin = () => {
+    setIsRecycleBinOpen(true);
+  };
+
+  const handleCloseRecycleBin = () => {
+    setIsRecycleBinOpen(false);
+  };
+
+  const handleOpenFile = (file: RecycleBinFile) => {
+    setSelectedFile(file);
+    setIsFileViewerOpen(true);
+    setIsRecycleBinOpen(false); // Close recycle bin when opening file
+  };
+
+  const handleCloseFileViewer = () => {
+    setIsFileViewerOpen(false);
+    setSelectedFile(null);
   };
 
   if (!isBooted) {
@@ -60,10 +95,23 @@ export const XPDesktop: React.FC<XPDesktopProps> = ({
       />
 
       {/* Desktop Icons */}
-      {showIcons && <XPDesktopIcons />}
+      {showIcons && <XPDesktopIcons onOpenRecycleBin={handleOpenRecycleBin} />}
 
       {/* Main Content */}
       <div className="relative z-10 pb-12 min-h-screen">{children}</div>
+
+      {/* Windows */}
+      <XPRecycleBin
+        isOpen={isRecycleBinOpen}
+        onClose={handleCloseRecycleBin}
+        onOpenFile={handleOpenFile}
+      />
+
+      <XPFileViewer
+        isOpen={isFileViewerOpen}
+        onClose={handleCloseFileViewer}
+        file={selectedFile}
+      />
 
       {/* Taskbar */}
       <XPTaskbar />
