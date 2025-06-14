@@ -101,6 +101,9 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
       },
+      fontSize: {
+        xxs: "10px",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -136,14 +139,50 @@ export default {
           },
         },
         "xp-startup": {
-          "0%": { opacity: "0", transform: "scale(0.95)" },
-          "100%": { opacity: "1", transform: "scale(1)" },
+          "0%": {
+            opacity: "0",
+            transform: "scale(0.9) translateY(20px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "scale(1) translateY(0)",
+          },
+        },
+        "boot-blink": {
+          "0%, 50%": { opacity: "1" },
+          "51%, 100%": { opacity: "0" },
+        },
+        "loading-bar": {
+          "0%": { width: "0%" },
+          "100%": { width: "100%" },
+        },
+        float: {
+          "0%, 100%": {
+            transform: "translateY(0px) translateX(0px)",
+          },
+          "25%": {
+            transform: "translateY(-10px) translateX(5px)",
+          },
+          "50%": {
+            transform: "translateY(-5px) translateX(-5px)",
+          },
+          "75%": {
+            transform: "translateY(-8px) translateX(3px)",
+          },
+        },
+        "desktop-icon-select": {
+          "0%": { backgroundColor: "transparent" },
+          "100%": { backgroundColor: "rgba(59, 130, 246, 0.3)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "xp-startup": "xp-startup 0.5s ease-out",
+        "xp-startup": "xp-startup 0.6s ease-out",
+        "boot-blink": "boot-blink 1s infinite",
+        "loading-bar": "loading-bar 2s ease-in-out",
+        float: "float 20s ease-in-out infinite",
+        "desktop-icon-select": "desktop-icon-select 0.1s ease-out",
       },
     },
   },
