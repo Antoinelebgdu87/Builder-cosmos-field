@@ -67,24 +67,6 @@ export const XPDesktop: React.FC<XPDesktopProps> = ({
 
       {/* Taskbar */}
       <XPTaskbar />
-
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px) translateX(0px);
-          }
-          25% {
-            transform: translateY(-10px) translateX(5px);
-          }
-          50% {
-            transform: translateY(-5px) translateX(-5px);
-          }
-          75% {
-            transform: translateY(-8px) translateX(3px);
-          }
-        }
-      `}</style>
     </div>
   );
 };
