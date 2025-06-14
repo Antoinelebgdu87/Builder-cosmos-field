@@ -31,9 +31,11 @@ export const XPDesktop: React.FC<XPDesktopProps> = ({
   const [selectedFile, setSelectedFile] = useState<RecycleBinFile | null>(null);
 
   useEffect(() => {
-    // Check if we've already booted in this session
+    // Check if we've already booted in this session or if boot should be skipped
     const hasBooted = sessionStorage.getItem("xp_booted");
-    if (hasBooted) {
+    const skipBoot = localStorage.getItem("skip_xp_boot") === "true";
+
+    if (hasBooted || skipBoot) {
       setIsBooted(true);
     }
   }, []);
