@@ -105,7 +105,7 @@ const Admin = () => {
 
   if (isLoading) {
     return (
-      <XPDesktop>
+      <XPDesktop showIcons={true}>
         <div className="flex items-center justify-center min-h-screen">
           <XPWindow title="Chargement..." className="w-80">
             <div className="text-center py-8">
@@ -122,7 +122,7 @@ const Admin = () => {
 
   if (!isAuthenticated) {
     return (
-      <XPDesktop>
+      <XPDesktop showIcons={true}>
         <div className="flex items-center justify-center min-h-screen p-8">
           <XPWindow
             title="Connexion Administrateur"
@@ -182,7 +182,7 @@ const Admin = () => {
   }
 
   return (
-    <XPDesktop>
+    <XPDesktop showIcons={true}>
       <div className="p-4 pt-8 space-y-4">
         {/* Header */}
         <XPWindow

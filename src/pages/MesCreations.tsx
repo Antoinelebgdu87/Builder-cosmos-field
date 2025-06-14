@@ -56,7 +56,7 @@ const MesCreations = () => {
   };
 
   return (
-    <XPDesktop>
+    <XPDesktop showIcons={true}>
       <div className="p-4 pt-8">
         <XPWindow
           title="Mes Créations - Lino LVT Portfolio"

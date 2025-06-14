@@ -8,7 +8,7 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <XPDesktop>
+    <XPDesktop showIcons={true}>
       <div className="flex items-center justify-center min-h-screen p-8">
         <XPWindow
           title="Erreur 404 - Page introuvable"

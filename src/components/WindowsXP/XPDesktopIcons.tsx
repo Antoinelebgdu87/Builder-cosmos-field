@@ -154,7 +154,7 @@ export const XPDesktopIcons: React.FC<XPDesktopIconsProps> = ({
 
   return (
     <div
-      className="absolute inset-0 z-0"
+      className="absolute inset-0 z-20"
       onClick={handleDesktopClick}
       onContextMenu={(e) => e.preventDefault()}
     >
@@ -165,7 +165,7 @@ export const XPDesktopIcons: React.FC<XPDesktopIconsProps> = ({
             selectedIcon === icon.id
               ? "bg-blue-500/30 border border-blue-500"
               : ""
-          } ${isDragging === icon.id ? "z-50" : "z-10"}`}
+          } ${isDragging === icon.id ? "z-50" : "z-30"}`}
           style={{
             left: `${iconPositions[icon.id]?.x || icon.position.x}px`,
             top: `${iconPositions[icon.id]?.y || icon.position.y}px`,

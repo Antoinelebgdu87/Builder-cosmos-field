@@ -13,7 +13,7 @@ const Index = () => {
   }
 
   return (
-    <XPDesktop>
+    <XPDesktop showIcons={true}>
       <div className="flex items-center justify-center min-h-screen p-8">
         <div className="animate-xp-startup">
           <XPWindow
