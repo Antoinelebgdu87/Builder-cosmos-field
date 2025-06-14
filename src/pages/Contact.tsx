@@ -2,8 +2,11 @@ import React from "react";
 import { XPDesktop } from "@/components/WindowsXP/XPDesktop";
 import { XPWindow } from "@/components/WindowsXP/XPWindow";
 import { XPButton } from "@/components/WindowsXP/XPButton";
+import { useDesktop } from "@/hooks/useDesktop";
 
 const Contact = () => {
+  const { closeWindow, minimizeWindow } = useDesktop();
+
   const openEmail = () => {
     window.location.href = "mailto:linolvt.pro@gmail.com";
   };
@@ -27,7 +30,8 @@ const Contact = () => {
         <XPWindow
           title="Contact - Lino LVT Portfolio"
           className="w-full max-w-2xl mx-auto"
-          showControls={false}
+          onClose={closeWindow}
+          onMinimize={minimizeWindow}
         >
           <div className="space-y-6">
             {/* Header */}

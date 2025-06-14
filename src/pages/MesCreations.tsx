@@ -3,10 +3,12 @@ import { XPDesktop } from "@/components/WindowsXP/XPDesktop";
 import { XPWindow } from "@/components/WindowsXP/XPWindow";
 import { XPButton } from "@/components/WindowsXP/XPButton";
 import { portfolioStorage, type PortfolioItem } from "@/lib/storage";
+import { useDesktop } from "@/hooks/useDesktop";
 
 const MesCreations = () => {
   const [items, setItems] = useState<PortfolioItem[]>([]);
   const [selectedType, setSelectedType] = useState<string>("tous");
+  const { closeWindow, minimizeWindow } = useDesktop();
 
   useEffect(() => {
     setItems(portfolioStorage.getItems());
@@ -61,7 +63,8 @@ const MesCreations = () => {
         <XPWindow
           title="Mes Créations - Lino LVT Portfolio"
           className="w-full max-w-6xl mx-auto"
-          showControls={false}
+          onClose={closeWindow}
+          onMinimize={minimizeWindow}
         >
           <div className="space-y-4">
             {/* Header */}

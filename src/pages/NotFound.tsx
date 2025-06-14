@@ -3,9 +3,11 @@ import { XPDesktop } from "@/components/WindowsXP/XPDesktop";
 import { XPWindow } from "@/components/WindowsXP/XPWindow";
 import { XPButton } from "@/components/WindowsXP/XPButton";
 import { useNavigate } from "react-router-dom";
+import { useDesktop } from "@/hooks/useDesktop";
 
 const NotFound = () => {
   const navigate = useNavigate();
+  const { closeWindow, minimizeWindow, openWindow } = useDesktop();
 
   return (
     <XPDesktop showIcons={true}>
@@ -13,7 +15,8 @@ const NotFound = () => {
         <XPWindow
           title="Erreur 404 - Page introuvable"
           className="w-full max-w-md"
-          showControls={false}
+          onClose={closeWindow}
+          onMinimize={minimizeWindow}
         >
           <div className="text-center space-y-6">
             {/* Error Icon */}
@@ -48,7 +51,7 @@ const NotFound = () => {
 
             {/* Action Buttons */}
             <div className="space-y-2">
-              <XPButton onClick={() => navigate("/")} className="w-full py-2">
+              <XPButton onClick={() => openWindow("/")} className="w-full py-2">
                 🏠 Retour à l'accueil
               </XPButton>
               <XPButton
@@ -62,8 +65,8 @@ const NotFound = () => {
             {/* Help text */}
             <div className="bg-xp-blue-50 border border-xp-blue-200 p-3">
               <p className="text-xs text-black font-ms-sans-serif">
-                💡 <strong>Astuce:</strong> Utilisez la barre de navigation pour
-                explorer le portfolio de Lino LVT.
+                💡 <strong>Astuce:</strong> Utilisez les icônes du bureau ou la
+                barre des tâches pour explorer le portfolio de Lino LVT.
               </p>
             </div>
           </div>

@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { XPDesktop } from "@/components/WindowsXP/XPDesktop";
 import { XPWindow } from "@/components/WindowsXP/XPWindow";
 import { XPButton } from "@/components/WindowsXP/XPButton";
 import { useNavigate } from "react-router-dom";
+import { useDesktop } from "@/hooks/useDesktop";
 
 const Index = () => {
   const navigate = useNavigate();
-  const [showDesktop, setShowDesktop] = useState(false);
+  const {
+    isDesktopMode,
+    goToDesktop,
+    openWindow,
+    closeWindow,
+    minimizeWindow,
+  } = useDesktop();
 
-  if (showDesktop) {
+  // If in desktop mode, show only desktop with icons
+  if (isDesktopMode) {
     return <XPDesktop showIcons={true}>{null}</XPDesktop>;
   }
 
@@ -19,8 +27,8 @@ const Index = () => {
           <XPWindow
             title="Bienvenue - Lino LVT Portfolio"
             className="w-full max-w-4xl mx-auto"
-            onMinimize={() => setShowDesktop(true)}
-            onClose={() => setShowDesktop(true)}
+            onMinimize={minimizeWindow}
+            onClose={closeWindow}
           >
             <div className="space-y-6">
               {/* Header Section */}
@@ -124,19 +132,19 @@ const Index = () => {
               {/* Navigation Buttons */}
               <div className="flex flex-wrap justify-center gap-3 bg-xp-gray-100 p-4 border border-xp-gray-300">
                 <XPButton
-                  onClick={() => navigate("/mes-creations")}
+                  onClick={() => openWindow("/mes-creations")}
                   className="px-6 py-2 bg-blue-100"
                 >
                   📁 Découvrir mes créations
                 </XPButton>
                 <XPButton
-                  onClick={() => navigate("/contact")}
+                  onClick={() => openWindow("/contact")}
                   className="px-6 py-2 bg-green-100"
                 >
                   📧 Me contacter
                 </XPButton>
                 <XPButton
-                  onClick={() => setShowDesktop(true)}
+                  onClick={goToDesktop}
                   className="px-6 py-2 bg-yellow-100"
                 >
                   🖥️ Voir le bureau
@@ -145,8 +153,8 @@ const Index = () => {
 
               {/* Quick Info */}
               <div className="text-center text-xs text-xp-gray-600 font-ms-sans-serif">
-                💡 Astuce : Double-cliquez sur les icônes du bureau pour
-                naviguer rapidement !
+                💡 Astuce : Utilisez les boutons × ou _ de la fenêtre pour
+                fermer ou minimiser !
               </div>
             </div>
           </XPWindow>

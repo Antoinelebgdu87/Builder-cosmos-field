@@ -4,10 +4,12 @@ import { XPWindow } from "@/components/WindowsXP/XPWindow";
 import { XPButton } from "@/components/WindowsXP/XPButton";
 import { XPInput, XPTextarea, XPSelect } from "@/components/WindowsXP/XPInput";
 import { useAuth } from "@/hooks/useAuth";
+import { useDesktop } from "@/hooks/useDesktop";
 import { portfolioStorage, type PortfolioItem } from "@/lib/storage";
 
 const Admin = () => {
   const { isAuthenticated, isLoading, login, logout } = useAuth();
+  const { closeWindow, minimizeWindow } = useDesktop();
   const [items, setItems] = useState<PortfolioItem[]>([]);
 
   // Login form state
@@ -107,7 +109,12 @@ const Admin = () => {
     return (
       <XPDesktop showIcons={true}>
         <div className="flex items-center justify-center min-h-screen">
-          <XPWindow title="Chargement..." className="w-80">
+          <XPWindow
+            title="Chargement..."
+            className="w-80"
+            onClose={closeWindow}
+            onMinimize={minimizeWindow}
+          >
             <div className="text-center py-8">
               <div className="text-4xl mb-4">⏳</div>
               <p className="font-ms-sans-serif">
@@ -127,7 +134,8 @@ const Admin = () => {
           <XPWindow
             title="Connexion Administrateur"
             className="w-full max-w-md"
-            showControls={false}
+            onClose={closeWindow}
+            onMinimize={minimizeWindow}
           >
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="text-center mb-6">
@@ -188,7 +196,8 @@ const Admin = () => {
         <XPWindow
           title="Administration - Lino LVT Portfolio"
           className="w-full max-w-6xl mx-auto"
-          showControls={false}
+          onClose={closeWindow}
+          onMinimize={minimizeWindow}
         >
           <div className="flex items-center justify-between">
             <div>

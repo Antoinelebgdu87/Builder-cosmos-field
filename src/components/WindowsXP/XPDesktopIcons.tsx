@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { soundManager } from "@/lib/sounds";
+import { useDesktop } from "@/hooks/useDesktop";
 
 interface DesktopIcon {
   id: string;
@@ -19,6 +20,7 @@ export const XPDesktopIcons: React.FC<XPDesktopIconsProps> = ({
   onOpenRecycleBin,
 }) => {
   const navigate = useNavigate();
+  const { openWindow } = useDesktop();
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState<string | null>(null);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
@@ -40,7 +42,7 @@ export const XPDesktopIcons: React.FC<XPDesktopIconsProps> = ({
       id: "portfolio",
       name: "Portfolio Lino LVT",
       icon: "🎬",
-      action: () => navigate("/"),
+      action: () => openWindow("/"),
       position: iconPositions.portfolio,
       type: "application",
     },
@@ -48,7 +50,7 @@ export const XPDesktopIcons: React.FC<XPDesktopIconsProps> = ({
       id: "creations",
       name: "Mes Créations",
       icon: "📁",
-      action: () => navigate("/mes-creations"),
+      action: () => openWindow("/mes-creations"),
       position: iconPositions.creations,
       type: "folder",
     },
@@ -56,7 +58,7 @@ export const XPDesktopIcons: React.FC<XPDesktopIconsProps> = ({
       id: "contact",
       name: "Contact",
       icon: "📧",
-      action: () => navigate("/contact"),
+      action: () => openWindow("/contact"),
       position: iconPositions.contact,
       type: "application",
     },
@@ -64,7 +66,7 @@ export const XPDesktopIcons: React.FC<XPDesktopIconsProps> = ({
       id: "admin",
       name: "Administration",
       icon: "🔐",
-      action: () => navigate("/admin"),
+      action: () => openWindow("/admin"),
       position: iconPositions.admin,
       type: "application",
     },
